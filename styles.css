@@ -1,5 +1,6 @@
 .main {
   border: 2px black solid;
+  background-color: black;
   width: 500px;
   height: 600px;
   display: flex;
@@ -16,6 +17,10 @@ body {
 }
 .result {
   flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 3px white solid;
 }
 .operations {
   flex: 4;
@@ -33,4 +38,26 @@ body {
 button {
   height: 70px;
   width: 70px;
+  border-radius: 35px;
+  font-size: 30px;
+  font-weight: 200;
+}
+.zero {
+  border-radius: 10px;
+  flex: 0 1 194px;
+}
+@font-face {
+  font-family: "Digital7MonoItalic";
+  src: url("fonts/digital-7-mono-italic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: italic;
+}
+p {
+  border: 5px white solid;
+  background-color: #b5b7b8;
+  flex: 0 1 418px;
+  height: 100px;
+}
+#back {
+  font-size: 25px;
 }
