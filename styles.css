@@ -52,12 +52,21 @@ button {
   font-weight: normal;
   font-style: italic;
 }
-p {
-  border: 5px white solid;
+.output {
+  border: 10px white solid;
   background-color: #b5b7b8;
   flex: 0 1 418px;
   height: 100px;
+
+  display: flex;
+  justify-content: right;
+  align-items: center;
 }
 #back {
   font-size: 25px;
+}
+p {
+  margin-right: 10px;
+  font-family: "Digital7MonoItalic";
+  font-size: 40px;
 }
