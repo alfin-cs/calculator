@@ -1,12 +1,13 @@
 let text = document.querySelector("p");
 let main = document.querySelector(".operations");
-let a = [];
+let equal_btn = document.querySelector("#equal");
+let arr = [];
 let number = "";
 main.addEventListener("click", (event) => {
   button = event.target;
   if (button.tagName == "BUTTON") {
     type(button.value);
-    console.log(a);
+    console.log(arr);
   }
 });
 function type(value) {
@@ -14,7 +15,26 @@ function type(value) {
     console.log(number);
     number = number.concat(value);
   } else {
-    a.push(number);
-    a.push(value);
+    if (number == "") {
+      return;
+    }
+    arr.push(number);
+    number = "";
+    arr.push(value);
   }
+}
+
+equal_btn.addEventListener("click", () => {
+  if (!(arr.length == 0)) {
+
+  }
+});
+let b = [4];
+if (b) {
+  console.log(b);
+}
+function operators(arr){
+  let i=1
+  let total=0
+  while (i<arr.length)
 }
