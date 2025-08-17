@@ -1,32 +1,39 @@
 let text = document.querySelector("p");
 let main = document.querySelector(".operations");
 let equal_btn = document.querySelector("#equal");
+let clear = document.querySelector("#clear");
+let backSpace = document.querySelector("#back");
 let arr = [];
 let number = "";
 const range_num = "1234567890.";
 main.addEventListener("click", (event) => {
   button = event.target;
   if (button.tagName == "BUTTON") {
-    type(button.value);
     console.log(arr);
+
+    type(button.value);
   }
 });
 function type(value) {
+  if (arr.length === 0 && value != "=") {
+    text.textContent = "";
+  }
   if (range_num.includes(value)) {
     if (!(number == "")) {
       arr.pop();
     }
-    console.log(number);
 
     number = number.concat(value);
+    text.textContent += value;
     arr.push(number);
-    console.log(arr);
   } else {
-    if (number == "" || value == "=") {
+    if (number == "" || !"/*-+%".includes(value)) {
+      //to avoid duplication of symbol and to prevent clear, equal, backspace to trigger
       return;
     }
     number = "";
     arr.push(value);
+    text.textContent += value;
   }
 }
 
@@ -35,12 +42,7 @@ equal_btn.addEventListener("click", () => {
     operations(arr);
   }
 });
-let b = [4, 6, 67];
-c = b.slice(1, 2);
-c;
-if (b) {
-  console.log(b.slice(-1));
-}
+
 function operations(arr) {
   if (!range_num.includes(arr.slice(-1))) {
     return;
@@ -52,8 +54,30 @@ function operations(arr) {
       total = +arr[0] + +arr[2];
       shift(total);
     }
+    if (arr[i] == "*") {
+      total = +arr[0] * +arr[2];
+      shift(total);
+    }
+    if (arr[i] == "-") {
+      total = +arr[0] - +arr[2];
+      shift(total);
+    }
+    if (arr[i] == "%") {
+      total = +arr[0] % +arr[2];
+      shift(total);
+    }
+    if (arr[i] == "/") {
+      total = +arr[0] / +arr[2];
+      shift(total);
+    }
+    console.log(arr);
   }
   console.log(total);
+  console.log(arr);
+  text.textContent = "";
+  text.textContent = total;
+  number = "";
+  arr.splice(0);
 }
 function shift(total) {
   arr.shift();
@@ -61,3 +85,8 @@ function shift(total) {
   arr.shift();
   arr.unshift(total);
 }
+clear.addEventListener("click", () => {
+  number = "";
+  arr = [];
+  text.textContent = "";
+});
