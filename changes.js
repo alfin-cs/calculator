@@ -3,14 +3,13 @@ let main = document.querySelector(".operations");
 let equal_btn = document.querySelector("#equal");
 let clear = document.querySelector("#clear");
 let backSpace = document.querySelector("#back");
+let display;
 let arr = [];
 let number = "";
 const range_num = "1234567890.";
 main.addEventListener("click", (event) => {
   button = event.target;
   if (button.tagName == "BUTTON") {
-    console.log(arr);
-
     type(button.value);
   }
 });
@@ -90,3 +89,20 @@ clear.addEventListener("click", () => {
   arr = [];
   text.textContent = "";
 });
+backSpace.addEventListener("click", () => {
+  if ("/*-+%".includes(arr.slice(-1))) {
+    arr.pop();
+    delete_last();
+  } else {
+    arr.pop();
+    number = number.slice(0, -1);
+    if (!number === "") {
+      arr.push(number);
+      delete_last();
+    }
+  }
+});
+function delete_last() {
+  display = text.textContent;
+  text.textContent = display.slice(0, -1);
+}
