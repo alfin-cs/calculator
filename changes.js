@@ -3,6 +3,7 @@ let main = document.querySelector(".operations");
 let equal_btn = document.querySelector("#equal");
 let clear = document.querySelector("#clear");
 let backSpace = document.querySelector("#back");
+let textScreen = document.querySelector(".output");
 let display;
 let arr = [];
 let number = "";
@@ -18,32 +19,32 @@ function type(value) {
     text.textContent = "";
   }
   if (range_num.includes(value)) {
+    if ((number.includes(".") || number === "") && value == ".") {
+      return;
+    }
     if (!(number == "")) {
       arr.pop();
     }
 
     number = number.concat(value);
     text.textContent += value;
+
     arr.push(number);
-  } else {
-    if (number == "" || !"/*-+%".includes(value)) {
-      //to avoid duplication of symbol and to prevent clear, equal, backspace to trigger
-      return;
-    }
+  } else if (
+    number !== "" &&
+    "/*-+%".includes(value) &&
+    number.slice(-1) !== "."
+  ) {
     number = "";
     arr.push(value);
     text.textContent += value;
   }
 }
 
-equal_btn.addEventListener("click", () => {
-  if (!(arr.length == 0)) {
-    operations(arr);
-  }
-});
+equal_btn.addEventListener("click", operations);
 
-function operations(arr) {
-  if (!range_num.includes(arr.slice(-1))) {
+function operations() {
+  if ("/*-+%".includes(arr.slice(-1)) || arr.length == 0) {
     return;
   }
   let i = 1;
@@ -89,20 +90,28 @@ clear.addEventListener("click", () => {
   arr = [];
   text.textContent = "";
 });
-backSpace.addEventListener("click", () => {
+backSpace.addEventListener("click", delete_last);
+function delete_last() {
   if ("/*-+%".includes(arr.slice(-1))) {
     arr.pop();
-    delete_last();
+    display = text.textContent;
+    text.textContent = display.slice(0, -1);
   } else {
     arr.pop();
     number = number.slice(0, -1);
-    if (!number === "") {
+    if (number !== "") {
       arr.push(number);
-      delete_last();
+      display = text.textContent;
+      text.textContent = display.slice(0, -1);
     }
   }
-});
-function delete_last() {
-  display = text.textContent;
-  text.textContent = display.slice(0, -1);
 }
+textScreen.addEventListener("keydown", (event) => {
+  value = event.key;
+  type(value);
+  if (value == "Backspace") {
+    delete_last();
+  } else if (value == "Enter") {
+    operations();
+  }
+});
