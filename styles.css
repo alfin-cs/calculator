@@ -1,26 +1,26 @@
 .main {
-  border: 2px black solid;
-  background-color: black;
+  background: #2c2c38;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
   width: 500px;
   height: 600px;
   display: flex;
   flex-direction: column;
 }
 body {
+  background: linear-gradient(135deg, #1e1e2f, #121212);
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
 }
-.main div {
-  border: 2px black solid;
-}
+
 .result {
   flex: 1;
   display: flex;
+
   justify-content: center;
   align-items: center;
-  border-bottom: 3px white solid;
 }
 .operations {
   flex: 4;
@@ -40,6 +40,9 @@ button {
   width: 70px;
   border-radius: 35px;
   font-size: 30px;
+  border: none;
+  background: #e0e0e0;
+  color: #333;
   font-weight: 200;
 }
 .zero {
@@ -53,11 +56,12 @@ button {
   font-style: italic;
 }
 .output {
-  border: 10px white solid;
-  background-color: #b5b7b8;
-  flex: 0 1 418px;
+  background: #3b3b4f;
+  color: #00ff88;
+  flex: 0 1 450px;
   height: 100px;
-
+  white-space: nowrap;
+  overflow: hidden;
   display: flex;
   justify-content: right;
   align-items: center;
@@ -69,4 +73,11 @@ p {
   margin-right: 10px;
   font-family: "Digital7MonoItalic";
   font-size: 40px;
+}
+#equal {
+  background: #06d6a0;
+}
+#clear,
+#back {
+  background: #ef476f;
 }
